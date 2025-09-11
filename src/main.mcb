@@ -1,0 +1,43 @@
+function on_load minecraft:load{
+    say Working
+    scoreboard objectives add Timer dummy "Timer"    
+}
+
+
+
+
+# This is for book animation to do all the particles and movements, each tag is seperate to play around with settings!
+dir book_create_animation {
+    dir float {
+        #This is to make it floaty
+        function movement {
+        REPEAT (0, 180, 1) as time {
+        execute as @e[tag=book_tp,scores={Timer=<%Math.round(time)%>}] at @s run tp @s ~ ~<%Math.sin(time/10)/7%> ~
+        }
+        execute as @e[tag=book_tp,scores={Timer=199..}] run kill @s
+        }
+        function movement_reload {
+        scoreboard players set @e[tag=book_tp] Timer 0
+        }
+        clock time 1t {
+        function main:book_create_animation/float/movement
+        scoreboard players add @e[tag= book_tp] Timer 1
+        }
+    }
+
+    #This is to make it have particles
+    dir particles {
+        function name {
+            
+        }
+
+
+
+
+        clock time 1t {
+        function main:book_create_animation/particles/movement
+        scoreboard players add @e[tag= book_tp] Timer 1
+        }
+    }
+}
+
