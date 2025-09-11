@@ -1,7 +1,12 @@
 function on_load minecraft:load{
     say Working
     scoreboard objectives add Timer dummy "Timer"    
+
+    # This is a place holder for particles
+    data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
+
 }
+
 
 
 
@@ -11,7 +16,7 @@ dir book_create_animation {
     dir float {
         #This is to make it floaty
         function movement {
-        REPEAT (0, 180, 1) as time {
+        REPEAT (0, 90, 1) as time {
         execute as @e[tag=book_tp,scores={Timer=<%Math.round(time)%>}] at @s run tp @s ~ ~<%Math.sin(time/10)/7%> ~
         }
         execute as @e[tag=book_tp,scores={Timer=199..}] run kill @s
@@ -21,23 +26,30 @@ dir book_create_animation {
         }
         clock time 1t {
         function main:book_create_animation/float/movement
-        scoreboard players add @e[tag= book_tp] Timer 1
+        scoreboard players add @e[tag=book_tp] Timer 1
         }
     }
 
     #This is to make it have particles
     dir particles {
-        function name {
-            
+        function fx {
+            REPEAT (0, 90, 0.5) as time {
+        $execute as @e[tag=book_particles,scores={Timer=<%Math.round(time)%>}] at @s run particle $(text) ~<%(Math.sin(time))%> ~<%time/50%> ~<%(Math.cos(time))%> 0 0 0 0 2 force
+        $execute as @e[tag=bat_particles] at @s run particle $(text) ^ ^ ^ 0 0 0 0 1 force
         }
-
-
-
-
+        }
+        function perlin_worms {
+            execute as @e[tag=book_particles,scores={Timer=0..10}] at @s run summon bat ~ ~ ~ {Silent:1b,Invisible:1b,Invulnerable:1b,Tags:["bat_particles"]}
+            execute as @e[tag=book_particles,scores={Timer=130..}] at @s run kill @e[tag=bat_particles]
+        }
         clock time 1t {
-        function main:book_create_animation/particles/movement
-        scoreboard players add @e[tag= book_tp] Timer 1
+        effect give @e[tag=bat_particles] minecraft:invisibility 2 0 true
+        function main:book_create_animation/particles/perlin_worms
+        function main:book_create_animation/particles/fx with storage magic:particles
+        scoreboard players add @e[tag=book_particles] Timer 1
         }
     }
 }
+
+
 
