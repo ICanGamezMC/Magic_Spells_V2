@@ -91,4 +91,4 @@ execute as @e[tag=book_tp,scores={Timer=87}] at @s run tp @s ~ ~0.09470989001174
 execute as @e[tag=book_tp,scores={Timer=88}] at @s run tp @s ~ ~0.08355959898453738 ~
 execute as @e[tag=book_tp,scores={Timer=89}] at @s run tp @s ~ ~0.07157440806541208 ~
 execute as @e[tag=book_tp,scores={Timer=90}] at @s run tp @s ~ ~0.058874069320250945 ~
-execute as @e[tag=book_tp,scores={Timer=199..}] run kill @s
+execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s

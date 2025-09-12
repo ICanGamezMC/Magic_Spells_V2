@@ -19,7 +19,7 @@ dir book_create_animation {
         REPEAT (0, 90, 1) as time {
         execute as @e[tag=book_tp,scores={Timer=<%Math.round(time)%>}] at @s run tp @s ~ ~<%Math.sin(time/10)/7%> ~
         }
-        execute as @e[tag=book_tp,scores={Timer=199..}] run kill @s
+        execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s
         }
         function movement_reload {
         scoreboard players set @e[tag=book_tp] Timer 0
@@ -40,6 +40,7 @@ dir book_create_animation {
         }
         function perlin_worms {
             execute as @e[tag=book_particles,scores={Timer=0..10}] at @s run summon bat ~ ~ ~ {Silent:1b,Invisible:1b,Invulnerable:1b,Tags:["bat_particles"]}
+            execute as @e[tag=book_particles,scores={Timer=130..}] at @s run tp @e[tag=bat_particles] ~ ~100 ~
             execute as @e[tag=book_particles,scores={Timer=130..}] at @s run kill @e[tag=bat_particles]
         }
         clock time 1t {
