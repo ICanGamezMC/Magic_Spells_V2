@@ -1,0 +1,112 @@
+dir items{
+    function repeat_checker {
+        tick {
+        function magic_items:items/book_recipes/recipes
+    }
+    }
+    
+    dir book_recipes {
+        function recipes {
+            execute as @a at @e[type=item,nbt={Item:{id:"minecraft:diamond",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run say hi
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+REPEAT (0, 2, 1) as i {
+    dir item/id/<%i%> {
+predicate item_id_checker {
+  "condition": "minecraft:match_tool",
+  "predicate": {
+    "predicates": {
+      "minecraft:custom_data": "{magic_id:<%i%>}"
+    }
+  }
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+loot_table magic_items/zombies_blood {
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:command_block",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:acacia_hanging_sign"
+              }
+            },
+            {
+              "function": "minecraft:set_custom_data",
+              "tag": "{magic_id:1}"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Zombie's Blood",
+                "color": "white",
+                "italic": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

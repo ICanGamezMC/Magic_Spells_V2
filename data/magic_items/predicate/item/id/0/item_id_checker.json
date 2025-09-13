@@ -1,0 +1,1 @@
+{"condition": "minecraft:match_tool","predicate":{"predicates":{"minecraft:custom_data": "{magic_id:0}"}}}

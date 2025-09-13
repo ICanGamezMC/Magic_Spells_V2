@@ -9,9 +9,9 @@ function on_load minecraft:load{
     scoreboard objectives add Deaths minecraft.custom:minecraft.deaths "Deaths"
     scoreboard objectives add Sneak_Time minecraft.custom:minecraft.sneak_time "Sneak Time"
 
-    # This is a place holder for particles
+    # This is a place holder for Settings and other data
     data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
-
+    data modify storage magic:carpet text set value "minecraft:red_carpet"
 }
 
 
@@ -65,7 +65,7 @@ dir book_create_animation {
 dir initiate_crafts {
     dir check_block{
         function main {
-            execute as @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] at @s if block ~ ~-1 ~ crafting_table if block ~-1 ~-1 ~2 #minecraft:candles[lit=false] if block ~1 ~-1 ~2 #minecraft:candles[lit=false] if block ~2 ~-1 ~1 #minecraft:candles[lit=false] if block ~2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~-2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-2 ~-1 ~1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~1 minecraft:red_carpet if block ~ ~-1 ~1 minecraft:red_carpet if block ~1 ~-1 ~1 minecraft:red_carpet if block ~-1 ~-1 ~ minecraft:red_carpet if block ~1 ~-1 ~ minecraft:red_carpet if block ~-1 ~-1 ~-1 minecraft:red_carpet if block ~ ~-1 ~-1 minecraft:red_carpet if block ~1 ~-1 ~-1 minecraft:red_carpet run function main_magic:initiate_crafts/check_block/success
+            $execute as @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] at @s if block ~ ~-1 ~ crafting_table if block ~-1 ~-1 ~2 #minecraft:candles[lit=false] if block ~1 ~-1 ~2 #minecraft:candles[lit=false] if block ~2 ~-1 ~1 #minecraft:candles[lit=false] if block ~2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~-2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-2 ~-1 ~1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~1 $(text) if block ~ ~-1 ~1 $(text) if block ~1 ~-1 ~1 $(text) if block ~-1 ~-1 ~ $(text) if block ~1 ~-1 ~ $(text) if block ~-1 ~-1 ~-1 $(text) if block ~ ~-1 ~-1 $(text) if block ~1 ~-1 ~-1 $(text) run function main_magic:initiate_crafts/check_block/success
         }
         function success {
                 summon marker ~ ~ ~ {Tags:["Starting_Animation_CBlock"]}
@@ -87,7 +87,7 @@ dir initiate_crafts {
             execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run kill @s
         }
         clock time 35t {
-            function main_magic:initiate_crafts/check_block/main
+            function main_magic:initiate_crafts/check_block/main with storage magic:carpet
         }
         clock animation 1t {
             execute as @e[tag=Starting_Animation_CBlock] unless entity @s[scores={Timer=400..}] run scoreboard players add @e[tag=Starting_Animation_CBlock] Timer 1
