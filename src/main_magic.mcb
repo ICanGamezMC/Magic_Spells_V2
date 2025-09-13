@@ -29,7 +29,7 @@ dir book_create_animation {
         scoreboard players set @e[tag=book_tp] Timer 0
         }
         clock time 1t {
-        function main:book_create_animation/float/movement
+        function main_magic:book_create_animation/float/movement
         scoreboard players add @e[tag=book_tp] Timer 1
         }
     }
@@ -49,18 +49,19 @@ dir book_create_animation {
         }
         clock time 1t {
         effect give @e[tag=bat_particles] minecraft:invisibility 2 0 true
-        function main:book_create_animation/particles/perlin_worms
-        function main:book_create_animation/particles/fx with storage magic:particles
+        function main_magic:book_create_animation/particles/perlin_worms
+        function main_magic:book_create_animation/particles/fx with storage magic:particles
         scoreboard players add @e[tag=book_particles] Timer 1
         }
     }
 }
 
-
+#This makes it initiate the crafting when the correct blocks are in place and item is present
+#Basically just makes a crafting table function for magic books
 dir initiate_crafts {
     dir check_block{
         function main {
-            execute as @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] at @s if block ~ ~-1 ~ crafting_table if block ~-1 ~-1 ~2 #minecraft:candles[lit=false] if block ~1 ~-1 ~2 #minecraft:candles[lit=false] if block ~2 ~-1 ~1 #minecraft:candles[lit=false] if block ~2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~-2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-2 ~-1 ~1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~1 minecraft:red_carpet if block ~ ~-1 ~1 minecraft:red_carpet if block ~1 ~-1 ~1 minecraft:red_carpet if block ~-1 ~-1 ~ minecraft:red_carpet if block ~1 ~-1 ~ minecraft:red_carpet if block ~-1 ~-1 ~-1 minecraft:red_carpet if block ~ ~-1 ~-1 minecraft:red_carpet if block ~1 ~-1 ~-1 minecraft:red_carpet run function main:initiate_crafts/check_block/success
+            execute as @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] at @s if block ~ ~-1 ~ crafting_table if block ~-1 ~-1 ~2 #minecraft:candles[lit=false] if block ~1 ~-1 ~2 #minecraft:candles[lit=false] if block ~2 ~-1 ~1 #minecraft:candles[lit=false] if block ~2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~-2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-2 ~-1 ~1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~1 minecraft:red_carpet if block ~ ~-1 ~1 minecraft:red_carpet if block ~1 ~-1 ~1 minecraft:red_carpet if block ~-1 ~-1 ~ minecraft:red_carpet if block ~1 ~-1 ~ minecraft:red_carpet if block ~-1 ~-1 ~-1 minecraft:red_carpet if block ~ ~-1 ~-1 minecraft:red_carpet if block ~1 ~-1 ~-1 minecraft:red_carpet run function main_magic:initiate_crafts/check_block/success
         }
          
 
@@ -70,25 +71,33 @@ dir initiate_crafts {
                 setblock ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true]
         }
         function animate {
+            execute as @e[tag=Starting_Animation_CBlock,scores={Timer=0..100}] at @s run particle minecraft:portal ~ ~ ~ 0 0 0 1 3 normal
             execute as @e[tag=Starting_Animation_CBlock,scores={Timer=0..1}] at @s run weather rain 1d 
-          execute as @e[tag=Starting_Animation_CBlock,scores={Timer=100..101}] at @s run playsound minecraft:block.candle.extinguish block @a ~ ~ ~ 20 1 0
+            execute as @e[tag=Starting_Animation_CBlock,scores={Timer=100..101}] at @s run playsound minecraft:block.candle.extinguish block @a ~ ~ ~ 20 1 0
             execute as @e[tag=Starting_Animation_CBlock,scores={Timer=100..101}] at @s run fill ~-2 ~-2 ~-2 ~2 ~2 ~2 candle[lit=true] replace minecraft:candle
             
         }
-
+        function destroyed{
+            execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run setblock ~ ~-1 ~ minecraft:air
+            execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run particle minecraft:witch ~ ~1 ~ 0.5 0.5 0.5 0.1 50 normal
+            execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run playsound minecraft:entity.ender_eye.death block @a ~ ~ ~ 20 1 0
+            execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run fill ~-2 ~-2 ~-2 ~2 ~2 ~2 candle[lit=false] replace minecraft:candle
+            execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run kill @s
+        }
 
 
 
         clock time 35t {
-            function main:initiate_crafts/check_block/main
+            function main_magic:initiate_crafts/check_block/main
         }
         clock animation 1t {
             execute as @e[tag=Starting_Animation_CBlock] unless entity @s[scores={Timer=400..}] run scoreboard players add @e[tag=Starting_Animation_CBlock] Timer 1
-            function main:initiate_crafts/check_block/animate
+            
+            function main_magic:initiate_crafts/check_block/animate
+            function main_magic:initiate_crafts/check_block/destroyed
+
         }
     }
-
-
 }
 
 

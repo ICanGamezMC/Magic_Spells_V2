@@ -1,1 +1,1 @@
-{"values":["main:on_load","main:book_create_animation/float/time","main:book_create_animation/particles/time","main:initiate_crafts/check_block/time","main:initiate_crafts/check_block/animation"]}
+{"values":["main_magic:on_load","main_magic:book_create_animation/float/time","main_magic:book_create_animation/particles/time","main_magic:initiate_crafts/check_block/time","main_magic:initiate_crafts/check_block/animation"]}
