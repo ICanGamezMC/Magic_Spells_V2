@@ -2,8 +2,12 @@
 
 
 function on_load minecraft:load{
-    say Working
+    say Loading DEMO Magic Spells V2
+    # Create the necessary scoreboards
     scoreboard objectives add Timer dummy "Timer"    
+    scoreboard objectives add Jump minecraft.custom:minecraft.jump "Jump"
+    scoreboard objectives add Deaths minecraft.custom:minecraft.deaths "Deaths"
+    scoreboard objectives add Sneak_Time minecraft.custom:minecraft.sneak_time "Sneak Time"
 
     # This is a place holder for particles
     data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
@@ -37,7 +41,7 @@ dir book_create_animation {
     #This is to make it have particles
     dir particles {
         function fx {
-            REPEAT (0, 90, 0.5) as time {
+            REPEAT (0, 90, 0.5) as time { 
         $execute as @e[tag=book_particles,scores={Timer=<%Math.round(time)%>}] at @s run particle $(text) ~<%(Math.sin(time))%> ~<%time/50%> ~<%(Math.cos(time))%> 0 0 0 0 2 force
         $execute as @e[tag=bat_particles] at @s run particle $(text) ^ ^ ^ 0 0 0 0 1 force
         }
@@ -63,8 +67,6 @@ dir initiate_crafts {
         function main {
             execute as @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] at @s if block ~ ~-1 ~ crafting_table if block ~-1 ~-1 ~2 #minecraft:candles[lit=false] if block ~1 ~-1 ~2 #minecraft:candles[lit=false] if block ~2 ~-1 ~1 #minecraft:candles[lit=false] if block ~2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~-2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-2 ~-1 ~1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~1 minecraft:red_carpet if block ~ ~-1 ~1 minecraft:red_carpet if block ~1 ~-1 ~1 minecraft:red_carpet if block ~-1 ~-1 ~ minecraft:red_carpet if block ~1 ~-1 ~ minecraft:red_carpet if block ~-1 ~-1 ~-1 minecraft:red_carpet if block ~ ~-1 ~-1 minecraft:red_carpet if block ~1 ~-1 ~-1 minecraft:red_carpet run function main_magic:initiate_crafts/check_block/success
         }
-         
-
         function success {
                 summon marker ~ ~ ~ {Tags:["Starting_Animation_CBlock"]}
                 summon minecraft:lightning_bolt ~ ~ ~
@@ -84,9 +86,6 @@ dir initiate_crafts {
             execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run fill ~-2 ~-2 ~-2 ~2 ~2 ~2 candle[lit=false] replace minecraft:candle
             execute as @e[tag=Starting_Animation_CBlock] at @s unless block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run kill @s
         }
-
-
-
         clock time 35t {
             function main_magic:initiate_crafts/check_block/main
         }
@@ -99,6 +98,13 @@ dir initiate_crafts {
         }
     }
 }
-
-
+#This creates extra requirements for crafting magic items, such as jumping
+dir crafting_extra {
+    function other_requirements {
+        execute as @a at @s unless entity @n[type=marker,tag=Starting_Animation_CBlock,distance=..5] run scoreboard players set @s Jump 0
+    }
+    clock time 1t {
+        function main_magic:crafting_extra/other_requirements
+    }
+}
 

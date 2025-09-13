@@ -1,5 +1,0 @@
-template check_block {
-    with arg1:word arg2:word{
-        execute if block ~-1 ~-1 ~1 <%arg1%> if block ~ ~-1 ~1 <%arg1%> if block ~1 ~-1 ~1 <%arg1%> if block ~-1 ~-1 ~ <%arg1%> if block ~1 ~-1 ~ <%arg1%> if block ~-1 ~-1 ~-1 <%arg1%> if block ~ ~-1 ~-1 <%arg1%> if block ~1 ~-1 ~-1 <%arg1%> run <%arg2%>
-    }
-}
