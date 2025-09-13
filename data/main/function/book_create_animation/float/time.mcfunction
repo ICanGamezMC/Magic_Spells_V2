@@ -1,4 +1,5 @@
-# Generated with MC-Build
+#Created By ICanGamez
+#Magic Spells V2
 
 schedule function main:book_create_animation/float/time 1t replace
 function main:book_create_animation/float/movement

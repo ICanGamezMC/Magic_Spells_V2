@@ -1,4 +1,5 @@
-# Generated with MC-Build
+#Created By ICanGamez
+#Magic Spells V2
 
 $execute as @e[tag=book_particles,scores={Timer=0}] at @s run particle $(text) ~0 ~0 ~1 0 0 0 0 2 force
 $execute as @e[tag=bat_particles] at @s run particle $(text) ^ ^ ^ 0 0 0 0 1 force

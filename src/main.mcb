@@ -1,3 +1,6 @@
+
+
+
 function on_load minecraft:load{
     say Working
     scoreboard objectives add Timer dummy "Timer"    
@@ -11,12 +14,13 @@ function on_load minecraft:load{
 
 
 
+
 # This is for book animation to do all the particles and movements, each tag is seperate to play around with settings!
 dir book_create_animation {
     dir float {
         #This is to make it floaty
         function movement {
-        REPEAT (0, 90, 1) as time {
+        REPEAT (0, 133, 1) as time {
         execute as @e[tag=book_tp,scores={Timer=<%Math.round(time)%>}] at @s run tp @s ~ ~<%Math.sin(time/10)/7%> ~
         }
         execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s
@@ -40,8 +44,8 @@ dir book_create_animation {
         }
         function perlin_worms {
             execute as @e[tag=book_particles,scores={Timer=0..10}] at @s run summon bat ~ ~ ~ {Silent:1b,Invisible:1b,Invulnerable:1b,Tags:["bat_particles"]}
-            execute as @e[tag=book_particles,scores={Timer=130..}] at @s run tp @e[tag=bat_particles] ~ ~100 ~
-            execute as @e[tag=book_particles,scores={Timer=130..}] at @s run kill @e[tag=bat_particles]
+            execute as @e[tag=book_particles,scores={Timer=130..}] at @s run tp @e[tag=bat_particles,limit=5,sort=nearest] ~ ~100 ~
+            execute as @e[tag=book_particles,scores={Timer=130..}] at @s run kill @e[tag=bat_particles,limit=5,sort=nearest]
         }
         clock time 1t {
         effect give @e[tag=bat_particles] minecraft:invisibility 2 0 true
@@ -50,6 +54,41 @@ dir book_create_animation {
         scoreboard players add @e[tag=book_particles] Timer 1
         }
     }
+}
+
+
+dir initiate_crafts {
+    dir check_block{
+        function main {
+            execute as @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] at @s if block ~ ~-1 ~ crafting_table if block ~-1 ~-1 ~2 #minecraft:candles[lit=false] if block ~1 ~-1 ~2 #minecraft:candles[lit=false] if block ~2 ~-1 ~1 #minecraft:candles[lit=false] if block ~2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~1 ~-1 ~-2 #minecraft:candles[lit=false] if block ~-2 ~-1 ~-1 #minecraft:candles[lit=false] if block ~-2 ~-1 ~1 #minecraft:candles[lit=false] if block ~-1 ~-1 ~1 minecraft:red_carpet if block ~ ~-1 ~1 minecraft:red_carpet if block ~1 ~-1 ~1 minecraft:red_carpet if block ~-1 ~-1 ~ minecraft:red_carpet if block ~1 ~-1 ~ minecraft:red_carpet if block ~-1 ~-1 ~-1 minecraft:red_carpet if block ~ ~-1 ~-1 minecraft:red_carpet if block ~1 ~-1 ~-1 minecraft:red_carpet run function main:initiate_crafts/check_block/success
+        }
+         
+
+        function success {
+                summon marker ~ ~ ~ {Tags:["Starting_Animation_CBlock"]}
+                summon minecraft:lightning_bolt ~ ~ ~
+                setblock ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true]
+        }
+        function animate {
+            execute as @e[tag=Starting_Animation_CBlock,scores={Timer=0..1}] at @s run weather rain 1d 
+          execute as @e[tag=Starting_Animation_CBlock,scores={Timer=100..101}] at @s run playsound minecraft:block.candle.extinguish block @a ~ ~ ~ 20 1 0
+            execute as @e[tag=Starting_Animation_CBlock,scores={Timer=100..101}] at @s run fill ~-2 ~-2 ~-2 ~2 ~2 ~2 candle[lit=true] replace minecraft:candle
+            
+        }
+
+
+
+
+        clock time 35t {
+            function main:initiate_crafts/check_block/main
+        }
+        clock animation 1t {
+            execute as @e[tag=Starting_Animation_CBlock] unless entity @s[scores={Timer=400..}] run scoreboard players add @e[tag=Starting_Animation_CBlock] Timer 1
+            function main:initiate_crafts/check_block/animate
+        }
+    }
+
+
 }
 
 

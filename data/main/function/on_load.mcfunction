@@ -1,4 +1,5 @@
-# Generated with MC-Build
+#Created By ICanGamez
+#Magic Spells V2
 
 say Working
 scoreboard objectives add Timer dummy "Timer"

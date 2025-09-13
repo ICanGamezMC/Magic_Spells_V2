@@ -1,4 +1,5 @@
-# Generated with MC-Build
+#Created By ICanGamez
+#Magic Spells V2
 
 execute as @e[tag=book_tp,scores={Timer=0}] at @s run tp @s ~ ~0 ~
 execute as @e[tag=book_tp,scores={Timer=1}] at @s run tp @s ~ ~0.014261916663832594 ~
@@ -91,4 +92,47 @@ execute as @e[tag=book_tp,scores={Timer=87}] at @s run tp @s ~ ~0.09470989001174
 execute as @e[tag=book_tp,scores={Timer=88}] at @s run tp @s ~ ~0.08355959898453738 ~
 execute as @e[tag=book_tp,scores={Timer=89}] at @s run tp @s ~ ~0.07157440806541208 ~
 execute as @e[tag=book_tp,scores={Timer=90}] at @s run tp @s ~ ~0.058874069320250945 ~
+execute as @e[tag=book_tp,scores={Timer=91}] at @s run tp @s ~ ~0.04558548033562173 ~
+execute as @e[tag=book_tp,scores={Timer=92}] at @s run tp @s ~ ~0.031841416300035376 ~
+execute as @e[tag=book_tp,scores={Timer=93}] at @s run tp @s ~ ~0.017779203358151672 ~
+execute as @e[tag=book_tp,scores={Timer=94}] at @s run tp @s ~ ~0.0035393464933368237 ~
+execute as @e[tag=book_tp,scores={Timer=95}] at @s run tp @s ~ ~-0.010735874351687043 ~
+execute as @e[tag=book_tp,scores={Timer=96}] at @s run tp @s ~ ~-0.024903825888997092 ~
+execute as @e[tag=book_tp,scores={Timer=97}] at @s run tp @s ~ ~-0.038822946630134636 ~
+execute as @e[tag=book_tp,scores={Timer=98}] at @s run tp @s ~ ~-0.052354161321704056 ~
+execute as @e[tag=book_tp,scores={Timer=99}] at @s run tp @s ~ ~-0.06536227053933162 ~
+execute as @e[tag=book_tp,scores={Timer=100}] at @s run tp @s ~ ~-0.07771730155562426 ~
+execute as @e[tag=book_tp,scores={Timer=101}] at @s run tp @s ~ ~-0.08929580698469744 ~
+execute as @e[tag=book_tp,scores={Timer=102}] at @s run tp @s ~ ~-0.0999820982276489 ~
+execute as @e[tag=book_tp,scores={Timer=103}] at @s run tp @s ~ ~-0.1096694013947975 ~
+execute as @e[tag=book_tp,scores={Timer=104}] at @s run tp @s ~ ~-0.11826092415509339 ~
+execute as @e[tag=book_tp,scores={Timer=105}] at @s run tp @s ~ ~-0.12567082285309572 ~
+execute as @e[tag=book_tp,scores={Timer=106}] at @s run tp @s ~ ~-0.13182506023040094 ~
+execute as @e[tag=book_tp,scores={Timer=107}] at @s run tp @s ~ ~-0.13666214518145542 ~
+execute as @e[tag=book_tp,scores={Timer=108}] at @s run tp @s ~ ~-0.14013374715235594 ~
+execute as @e[tag=book_tp,scores={Timer=109}] at @s run tp @s ~ ~-0.1422051790437682 ~
+execute as @e[tag=book_tp,scores={Timer=110}] at @s run tp @s ~ ~-0.14285574379295765 ~
+execute as @e[tag=book_tp,scores={Timer=111}] at @s run tp @s ~ ~-0.14207894117199846 ~
+execute as @e[tag=book_tp,scores={Timer=112}] at @s run tp @s ~ ~-0.13988253273590248 ~
+execute as @e[tag=book_tp,scores={Timer=113}] at @s run tp @s ~ ~-0.136288464271727 ~
+execute as @e[tag=book_tp,scores={Timer=114}] at @s run tp @s ~ ~-0.1313326465235251 ~
+execute as @e[tag=book_tp,scores={Timer=115}] at @s run tp @s ~ ~-0.12506459638406123 ~
+execute as @e[tag=book_tp,scores={Timer=116}] at @s run tp @s ~ ~-0.11754694213838698 ~
+execute as @e[tag=book_tp,scores={Timer=117}] at @s run tp @s ~ ~-0.10885479770271904 ~
+execute as @e[tag=book_tp,scores={Timer=118}] at @s run tp @s ~ ~-0.09907501211101748 ~
+execute as @e[tag=book_tp,scores={Timer=119}] at @s run tp @s ~ ~-0.08830530174814762 ~
+execute as @e[tag=book_tp,scores={Timer=120}] at @s run tp @s ~ ~-0.07665327400006214 ~
+execute as @e[tag=book_tp,scores={Timer=121}] at @s run tp @s ~ ~-0.06423535207637164 ~
+execute as @e[tag=book_tp,scores={Timer=122}] at @s run tp @s ~ ~-0.05117561174811839 ~
+execute as @e[tag=book_tp,scores={Timer=123}] at @s run tp @s ~ ~-0.03760454162368585 ~
+execute as @e[tag=book_tp,scores={Timer=124}] at @s run tp @s ~ ~-0.023657739349758487 ~
+execute as @e[tag=book_tp,scores={Timer=125}] at @s run tp @s ~ ~-0.00947455676445724 ~
+execute as @e[tag=book_tp,scores={Timer=126}] at @s run tp @s ~ ~0.004803292460162385 ~
+execute as @e[tag=book_tp,scores={Timer=127}] at @s run tp @s ~ ~0.019033148774277458 ~
+execute as @e[tag=book_tp,scores={Timer=128}] at @s run tp @s ~ ~0.03307283215736271 ~
+execute as @e[tag=book_tp,scores={Timer=129}] at @s run tp @s ~ ~0.046782062733956145 ~
+execute as @e[tag=book_tp,scores={Timer=130}] at @s run tp @s ~ ~0.06002386240380585 ~
+execute as @e[tag=book_tp,scores={Timer=131}] at @s run tp @s ~ ~0.07266592348176767 ~
+execute as @e[tag=book_tp,scores={Timer=132}] at @s run tp @s ~ ~0.08458193067246043 ~
+execute as @e[tag=book_tp,scores={Timer=133}] at @s run tp @s ~ ~0.09565282317094319 ~
 execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s
