@@ -3,7 +3,7 @@ data/magic_items/function/items/book_recipes/recipes.mcfunction:76089e18d5ab3160
 data/magic_items/predicate/item/id/0/item_id_checker.json:50e652ec7c23307ced321bdccd9d1cb1c95be39e
 data/magic_items/predicate/item/id/1/item_id_checker.json:5505c7b53883655cc8a7560a1b7e18373fff2765
 data/magic_items/predicate/item/id/2/item_id_checker.json:cf9a3f66a2e9bf81cf4164b55fc9d5d9a6d504fe
-data/magic_items/loot_table/magic_items/zombies_blood.json:363e00495819b46f0bdd86c26cf6b896fe49f950
+data/magic_items/loot_table/magic_items/zombies_blood.json:2f6f00365f980b8f4c4eb37b6053eab1914b56c0
 data/magic_items/function/zzz/tick.mcfunction:5ce25b468e6cd49a0ca0eb8aed1baf51991d797a
 data/main_magic/function/on_load.mcfunction:5f0b7953872738688422fd77792b2e3594621386
 data/main_magic/function/book_create_animation/float/movement.mcfunction:6e712e1abaadb85a1d13dc6a2cf89ab102bce2ac

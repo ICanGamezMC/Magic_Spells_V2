@@ -74,7 +74,6 @@ predicate item_id_checker {
 
 
 
-
 loot_table magic_items/zombies_blood {
   "type": "minecraft:entity",
   "pools": [
@@ -89,7 +88,7 @@ loot_table magic_items/zombies_blood {
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:item_model": "minecraft:acacia_hanging_sign"
+                "minecraft:item_model": "magic:resources/zombie_blood"
               }
             },
             {
