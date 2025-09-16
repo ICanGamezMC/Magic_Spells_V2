@@ -33,8 +33,12 @@ dir book_create_animation {
         scoreboard players set @e[tag=book_tp] Timer 0
         }
         clock time 1t {
+        function main_magic:book_create_animation/float/music
         function main_magic:book_create_animation/float/movement
         scoreboard players add @e[tag=book_tp] Timer 1
+        }
+        function music {
+           execute as @e[tag=book_tp,scores={Timer=5..10}] at @s run playsound minecraft:block.fire.extinguish record @a[distance=..10] ~ ~ ~ 10 1 1
         }
     }
 
