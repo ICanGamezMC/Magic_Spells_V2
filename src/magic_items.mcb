@@ -28,9 +28,9 @@ dir items{
 
 dir item/id/ {
 function checker {
-      REPEAT(Object.entries({2:5,98:5,99:6}).map(([k,v],i)=>[k,i,v])) as k,i,v {
-        execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%k%>b}] run say hi<%k%> mana<%v%>
-    }
+      REPEAT(config.spells) as spell{
+     execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%spell.id%>b}] run say hi<%spell.id%> mana<%spell.mana%>
+}
 }
 function general_check {
   function magic_items:item/id/checker
@@ -93,8 +93,8 @@ advancement right_click {
 
 
 
-
-loot_table magic_items/zombies_blood {
+REPEAT(config.items) as items{
+loot_table magic_items/<%items.id%> {
   "type": "minecraft:entity",
   "pools": [
     {
@@ -108,17 +108,17 @@ loot_table magic_items/zombies_blood {
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:item_model": "magic:resources/zombie_blood"
+                "minecraft:item_model": "magic:resources/<%items.id%>"
               }
             },
             {
               "function": "minecraft:set_custom_data",
-              "tag": "{magic_id:1}"
+              "tag": "{magic_id:<%items.magic_id%>}"
             },
             {
               "function": "minecraft:set_name",
               "name": {
-                "text": "Zombie's Blood",
+                "text": "<%items.name%>",
                 "color": "white",
                 "italic": false
               }
@@ -129,6 +129,8 @@ loot_table magic_items/zombies_blood {
     }
   ]
 }
+}
+
 loot_table magic_books/zombie_book {
   "type": "minecraft:entity",
   "pools": [
