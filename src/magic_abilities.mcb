@@ -1,0 +1,14 @@
+function tick{
+    tick {
+        
+    }
+}
+
+dir book_abilities {
+    
+        function zombie_book {
+            summon zombie ~ ~ ~
+        }
+        
+    
+}

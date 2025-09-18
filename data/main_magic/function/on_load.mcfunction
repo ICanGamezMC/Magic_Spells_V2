@@ -5,6 +5,7 @@ say Loading DEMO Magic Spells V2
 # Create the necessary scoreboards
 scoreboard objectives add Timer dummy "Timer"
 scoreboard objectives add Mana dummy "Mana"
+scoreboard objectives add Cooldown dummy "Cooldown"
 scoreboard objectives add Jump minecraft.custom:minecraft.jump "Jump"
 scoreboard objectives add Deaths minecraft.custom:minecraft.deaths "Deaths"
 scoreboard objectives add Sneak_Time minecraft.custom:minecraft.sneak_time "Sneak Time"

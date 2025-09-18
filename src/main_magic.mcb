@@ -6,6 +6,7 @@ function on_load minecraft:load{
     # Create the necessary scoreboards
     scoreboard objectives add Timer dummy "Timer"    
     scoreboard objectives add Mana dummy "Mana"    
+     scoreboard objectives add Cooldown dummy "Cooldown"    
     scoreboard objectives add Jump minecraft.custom:minecraft.jump "Jump"
     scoreboard objectives add Deaths minecraft.custom:minecraft.deaths "Deaths"
     scoreboard objectives add Sneak_Time minecraft.custom:minecraft.sneak_time "Sneak Time"
@@ -129,11 +130,14 @@ dir crafting_extra {
 
 dir player_data {
     function mana_on_start {
+        scoreboard players set @a Cooldown 0
         scoreboard players set @a Mana 100
         tag @s add Player_Magic_Start
     }
     function mana_regen {
         scoreboard players add @a[scores={Mana=..99}] Mana 1
+        execute as @a if entity @s[scores={Cooldown=..0}] run scoreboard players set @s[scores={Mana=1..}] Cooldown 0
+        execute as @a unless entity @s[scores={Cooldown=..0}] run scoreboard players remove @s[scores={Mana=1..}] Cooldown 1
     }
     clock time 20t {
         function main_magic:player_data/mana_regen
@@ -141,7 +145,8 @@ dir player_data {
     function tick_mana {
         tick {
             execute as @a at @s unless entity @s[tag=Player_Magic_Start] run function main_magic:player_data/mana_on_start
-            execute as @a if items entity @s weapon.* *[minecraft:custom_data~{mana:1b}] run title @s actionbar ["",{"text":"-<","color":"dark_purple"},{"text":"Mana ","color":"light_purple"},{"color":"light_purple","score":{"objective":"Mana","name":"@s"}},{"text":">-","color":"dark_purple"}]
+            execute as @a if entity @s[scores={Cooldown=0}] if items entity @s weapon.* *[minecraft:custom_data~{mana:1b}] run title @s actionbar ["",{"text":"-<","color":"dark_purple"},{"text":"Mana ","color":"light_purple"},{"color":"light_purple","score":{"objective":"Mana","name":"@s"}},{"text":">-","color":"dark_purple"}]
+            execute as @a if entity @s[scores={Cooldown=1..}] if items entity @s weapon.* *[minecraft:custom_data~{mana:1b}] run title @s actionbar ["",{"text":"-<","color":"dark_purple"},{"text":"Mana ","color":"light_purple"},{"color":"light_purple","score":{"objective":"Mana","name":"@s"}},{"text":", ","color":"light_purple"},{"text":"Cooldown ","color":"yellow"},{"color":"yellow","score":{"objective":"Cooldown","name":"@s"}},{"text":">-","color":"dark_purple"}]
         }
     }
 }

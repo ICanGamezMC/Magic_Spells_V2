@@ -39,12 +39,15 @@ dir items{
 dir item/id/ {
 function checker {
       REPEAT(config.books) as books{
-
-     execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players remove @s Mana <%books.mana%>
+        execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run function magic_abilities:book_abilities/<%books.id%>
+        execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 1
+      execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players remove @s Mana <%books.mana%>
+  execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players add @s Cooldown <%Math.round(books.mana+(books.mana/10))%>
 }
+     
 }
 function general_check {
-  function magic_items:item/id/checker
+  execute as @a at @s run function magic_items:item/id/checker
   advancement revoke @s only magic_items:right_click
 }
 }
