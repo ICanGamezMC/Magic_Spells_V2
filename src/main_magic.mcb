@@ -12,6 +12,7 @@ function on_load minecraft:load{
     # This is a place holder for Settings and other data
     data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
     data modify storage magic:carpet text set value "minecraft:red_carpet"
+    data modify storage magic:music text set value "flute"
 }
 
 
@@ -27,20 +28,33 @@ dir book_create_animation {
         REPEAT (0, 133, 1) as time {
         execute as @e[tag=book_tp,scores={Timer=<%Math.round(time)%>}] at @s run tp @s ~ ~<%Math.sin(time/10)/7%> ~
         }
+        execute as @e[tag=book_tp,scores={Timer=120..}] at @s run particle dust_color_transition{from_color:[0.29,0.01,0.31],to_color:[0.0,0.0,0.0],scale:2} ~ ~ ~ 0.7 0.7 0.7 0 100 normal
         execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s
         }
         function movement_reload {
         scoreboard players set @e[tag=book_tp] Timer 0
         }
         clock time 1t {
-        function main_magic:book_create_animation/float/music
+        function main_magic:book_create_animation/float/music with storage magic:music
         function main_magic:book_create_animation/float/movement
         scoreboard players add @e[tag=book_tp] Timer 1
         }
         function music {
-           execute as @e[tag=book_tp,scores={Timer=5..10}] at @s run playsound minecraft:block.fire.extinguish record @a[distance=..10] ~ ~ ~ 10 1 1
+           execute as @e[tag=book_tp,scores={Timer=2}] at @s run playsound minecraft:block.fire.extinguish record @a[distance=..10] ~ ~ ~ 10 1 1
+           $execute as @e[tag=book_tp,scores={Timer=24}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 0.5 1
+           $execute as @e[tag=book_tp,scores={Timer=30}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 0.6 1
+           $execute as @e[tag=book_tp,scores={Timer=36}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 0.5 1
+           $execute as @e[tag=book_tp,scores={Timer=42}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 0.4 1
+           $execute as @e[tag=book_tp,scores={Timer=64}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 1.2 1
+           $execute as @e[tag=book_tp,scores={Timer=70}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 1.3 1
+           $execute as @e[tag=book_tp,scores={Timer=76}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 1.4 1
+           $execute as @e[tag=book_tp,scores={Timer=82}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 1.3 1
+           $execute as @e[tag=book_tp,scores={Timer=98}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 1.8 1
+           $execute as @e[tag=book_tp,scores={Timer=104}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 1.9 1
+           $execute as @e[tag=book_tp,scores={Timer=107}] at @s run playsound minecraft:block.note_block.$(text) record @a[distance=..10] ~ ~ ~ 10 2 1
         }
     }
+
 
     #This is to make it have particles
     dir particles {

@@ -135,4 +135,5 @@ execute as @e[tag=book_tp,scores={Timer=130}] at @s run tp @s ~ ~0.0600238624038
 execute as @e[tag=book_tp,scores={Timer=131}] at @s run tp @s ~ ~0.07266592348176767 ~
 execute as @e[tag=book_tp,scores={Timer=132}] at @s run tp @s ~ ~0.08458193067246043 ~
 execute as @e[tag=book_tp,scores={Timer=133}] at @s run tp @s ~ ~0.09565282317094319 ~
+execute as @e[tag=book_tp,scores={Timer=120..}] at @s run particle dust_color_transition{from_color:[0.29,0.01,0.31],to_color:[0.0,0.0,0.0],scale:2} ~ ~ ~ 0.7 0.7 0.7 0 100 normal
 execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s

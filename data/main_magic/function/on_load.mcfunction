@@ -10,3 +10,4 @@ scoreboard objectives add Sneak_Time minecraft.custom:minecraft.sneak_time "Snea
 # This is a place holder for Settings and other data
 data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
 data modify storage magic:carpet text set value "minecraft:red_carpet"
+data modify storage magic:music text set value "flute"
