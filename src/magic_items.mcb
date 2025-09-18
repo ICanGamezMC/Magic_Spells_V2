@@ -28,8 +28,8 @@ dir items{
 
 dir item/id/ {
 function checker {
-      REPEAT(config.spells) as spell{
-     execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%spell.id%>b}] run say hi<%spell.id%> mana<%spell.mana%>
+      REPEAT(config.books) as books{
+     execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run say hi<%books.magic_id%> mana<%books.mana%>
 }
 }
 function general_check {
@@ -131,7 +131,8 @@ loot_table magic_items/<%items.id%> {
 }
 }
 
-loot_table magic_books/zombie_book {
+REPEAT(config.books) as books{
+loot_table magic_books/<%books.id%> {
   "type": "minecraft:entity",
   "pools": [
     {
@@ -145,7 +146,7 @@ loot_table magic_books/zombie_book {
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:item_model": "magic:book/zombie_book"
+                "minecraft:item_model": "magic:book/<%books.id%>"
               }
             },
             {
@@ -158,7 +159,7 @@ loot_table magic_books/zombie_book {
             {
               "function": "minecraft:set_name",
               "name": {
-                "text": "Undead Book",
+                "text": "<%books.name%>",
                 "color": "green",
                 "italic": false
               }
@@ -185,7 +186,7 @@ loot_table magic_books/zombie_book {
                   "text": "Mana Cost: ",
                   "extra": [
                     {
-                      "text": "5",
+                      "text": "<%books.mana%>",
                       "color": "light_purple",
                       "bold": true
                     }
@@ -201,4 +202,5 @@ loot_table magic_books/zombie_book {
       ]
     }
   ]
+}
 }

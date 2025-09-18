@@ -6,7 +6,6 @@ module.exports = {
   ioThreadCount: 1, // default: 1, the number of threads to use for IO operations, 1 is syncronous.
   setup: null, // default: null, a function that will be called to allow binding to mcb events.
 
-  spells: [{id:0,mana:0},{id:2,mana:5}], // spells id with mana costs
-  items: [{id:"zombies_blood",magic_id:0,name:"Zombie's Blood"}] // items that can have spells
-
+  items: [{id:"zombie_blood",magic_id:1,name:"Zombie's Blood"}], // items that create spell books
+  books: [{id:"zombie_book",magic_id:2,name:"Undead Book",mana:5}]
 };

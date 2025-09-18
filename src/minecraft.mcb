@@ -1,5 +1,4 @@
 
-
 loot_table entities/zombie{
   "type": "minecraft:entity",
   "pools": [
