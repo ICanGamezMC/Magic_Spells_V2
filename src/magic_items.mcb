@@ -39,7 +39,8 @@ dir items{
 dir item/id/ {
 function checker {
       REPEAT(config.books) as books{
-     execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run say hi<%books.magic_id%> mana<%books.mana%>
+
+     execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players remove @s Mana <%books.mana%>
 }
 }
 function general_check {
