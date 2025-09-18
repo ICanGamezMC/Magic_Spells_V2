@@ -5,7 +5,7 @@ dir items{
     
     dir book_recipes {
         function recipes {
-            execute as @a at @e[type=item,nbt={Item:{count:1,components:{"minecraft:custom_data":{magic_id:1}}}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/book_of_the_dead
+            execute as @a at @e[type=item,nbt={Item:{count:5,components:{"minecraft:custom_data":{magic_id:1}}}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/book_of_the_dead
         }
     }
     function spawning {
@@ -14,7 +14,7 @@ dir items{
         data modify storage magic:particles text set value "dust_color_transition{from_color:[0.07,0.31,0.01],to_color:[0.85,0.99,0.13],scale:1}"
         summon item_display ~ ~ ~ {billboard:"center",Tags:["book_tp","book_particles"],item:{id:"minecraft:book",components:{"minecraft:item_model":"magic:book/zombie_book"}}}
         kill @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},sort=nearest,limit=1]
-        kill @e[type=item,nbt={Item:{count:1,components:{"minecraft:custom_data":{magic_id:1}}}},sort=nearest,limit=1]
+        kill @e[type=item,nbt={Item:{count:5,components:{"minecraft:custom_data":{magic_id:1}}}},sort=nearest,limit=1]
       }
     }
 }
@@ -26,19 +26,17 @@ dir items{
 
 
 
-
-REPEAT ({a: 0, b: 2, c: 7, d: 9}) as key, i {
-    dir item/id/<%i%> {
-predicate item_id_checker {
-  "condition": "minecraft:match_tool",
-  "predicate": {
-    "predicates": {
-      "minecraft:custom_data": "{magic_id:<%i%>}"
+dir item/id/ {
+function checker {
+      REPEAT(Object.entries({2:5,98:5,99:6}).map(([k,v],i)=>[k,i,v])) as k,i,v {
+        execute if items entity @s weapon.* *[minecraft:custom_data~{magic_id:<%k%>b}] run say hi<%k%> mana<%v%>
     }
-  }
+}
+function general_check {
+  function magic_items:item/id/checker
+  advancement revoke @s only magic_items:right_click
 }
 }
-}
 
 
 
@@ -47,13 +45,28 @@ predicate item_id_checker {
 
 
 
-
-
-
-
-
-
-
+advancement right_click {
+    "criteria": {
+        "requirement":{
+            "trigger":"minecraft:using_item",
+            "conditions": {
+                "item":{
+                    "components":{
+                        "minecraft:food":{
+                            "nutrition":0,
+                            "saturation":0,
+                            "can_always_eat": true,
+                            "eat_seconds":99999
+                        }
+                    }
+                }
+            }
+        }
+        },
+        "rewards": {
+            "function": "magic_items:item/id/general_check"
+        }
+    }
 
 
 
@@ -109,6 +122,77 @@ loot_table magic_items/zombies_blood {
                 "color": "white",
                 "italic": false
               }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+loot_table magic_books/zombie_book {
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:command_block",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "magic:book/zombie_book"
+              }
+            },
+            {
+              "function": "minecraft:set_custom_data",
+              "tag": {
+                "magic_id": 2,
+                "mana": 1
+              }
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Undead Book",
+                "color": "green",
+                "italic": false
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:food": {
+                  "nutrition": 0,
+                  "saturation": 0,
+                  "can_always_eat": true
+                },
+                "minecraft:consumable": {
+                  "consume_seconds": 99999,
+                  "animation": "block"
+                },
+                "minecraft:max_stack_size": 1
+              }
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                {
+                  "text": "Mana Cost: ",
+                  "extra": [
+                    {
+                      "text": "5",
+                      "color": "light_purple",
+                      "bold": true
+                    }
+                  ],
+                  "color": "gray",
+                  "italic": false
+                }
+              ],
+              "mode": "replace_all"
             }
           ]
         }

@@ -28,7 +28,7 @@ dir book_create_animation {
         REPEAT (0, 133, 1) as time {
         execute as @e[tag=book_tp,scores={Timer=<%Math.round(time)%>}] at @s run tp @s ~ ~<%Math.sin(time/10)/7%> ~
         }
-        execute as @e[tag=book_tp,scores={Timer=120..}] at @s run particle dust_color_transition{from_color:[0.29,0.01,0.31],to_color:[0.0,0.0,0.0],scale:2} ~ ~ ~ 0.7 0.7 0.7 0 100 normal
+        execute as @e[tag=book_tp,scores={Timer=120..}] at @s run particle dust_color_transition{from_color:[0.29,0.01,0.31],to_color:[0.0,0.0,0.0],scale:2} ~ ~ ~ 0.4 0.4 0.4 0 100 normal
         execute as @e[tag=book_tp,scores={Timer=133..}] run kill @s
         }
         function movement_reload {
@@ -108,7 +108,7 @@ dir initiate_crafts {
             function main_magic:initiate_crafts/check_block/main with storage magic:carpet
         }
         clock animation 1t {
-            execute as @e[tag=Starting_Animation_CBlock] unless entity @s[scores={Timer=400..}] run scoreboard players add @e[tag=Starting_Animation_CBlock] Timer 1
+            execute as @e[tag=Starting_Animation_CBlock] at @s unless entity @s[scores={Timer=400..}] run scoreboard players add @s Timer 1
             
             function main_magic:initiate_crafts/check_block/animate
             function main_magic:initiate_crafts/check_block/destroyed
