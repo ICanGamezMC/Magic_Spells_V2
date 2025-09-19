@@ -13,3 +13,6 @@ scoreboard objectives add Sneak_Time minecraft.custom:minecraft.sneak_time "Snea
 data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
 data modify storage magic:carpet text set value "minecraft:red_carpet"
 data modify storage magic:music text set value "flute"
+# This is to add teams for glowing
+team add Monster "Monster"
+team modify Monster color red

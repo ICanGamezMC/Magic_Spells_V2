@@ -15,6 +15,9 @@ function on_load minecraft:load{
     data modify storage magic:particles text set value "dust{color:[1.0,0.87,0.0],scale:1}"
     data modify storage magic:carpet text set value "minecraft:red_carpet"
     data modify storage magic:music text set value "flute"
+    # This is to add teams for glowing
+    team add Monster "Monster"
+    team modify Monster color red
 }
 
 
@@ -127,7 +130,7 @@ dir crafting_extra {
         function main_magic:crafting_extra/other_requirements
     }
 }
-
+# This creates mana and cooldown system for using magic items
 dir player_data {
     function mana_on_start {
         scoreboard players set @a Cooldown 0

@@ -166,7 +166,7 @@ loot_table magic_books/<%books.id%> {
             {
               "function": "minecraft:set_custom_data",
               "tag": {
-                "magic_id": 2,
+                "magic_id": <%books.magic_id%>,
                 "mana": 1
               }
             },

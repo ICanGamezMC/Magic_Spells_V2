@@ -16,5 +16,8 @@ module.exports = {
 
 
   // This creates spell books
-  books: [{id:"zombie_book",magic_id:2,name:"Undead Book",mana:5}]
+  books: [
+    {id:"zombie_book",magic_id:2,name:"Undead Book",mana:5},
+    {id:"glowstone_book",magic_id:4,name:"Glowstone Book",mana:3}
+  ]
 };
