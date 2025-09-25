@@ -9,7 +9,8 @@ module.exports = {
   // items that create spell books
   items: [
     {id:"zombie_blood",magic_id:1,name:"Zombie's Blood"},
-    {id:"bone_shard",magic_id:3,name:"Bone Shard"}
+    {id:"bone_shard",magic_id:3,name:"Bone Shard"},
+    {id:"scholar_book",magic_id:6,name:"Scholar's Tomb"}
   ], 
 
 
@@ -17,7 +18,8 @@ module.exports = {
 
   // This creates spell books
   books: [
-    {id:"zombie_book",magic_id:2,name:"Undead Book",mana:5},
-    {id:"glowstone_book",magic_id:4,name:"Glowstone Book",mana:3}
+    {id:"zombie_book",magic_id:2,name:"Undead Book",mana:5,cooldown:6},
+    {id:"glowstone_book",magic_id:4,name:"Glowstone Book",mana:3,cooldown:3},
+    {id:"wind_book",magic_id:5,name:"Book of Charged Winds",mana:5,cooldown:1}
   ]
 };

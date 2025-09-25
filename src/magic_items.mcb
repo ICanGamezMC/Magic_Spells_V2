@@ -8,6 +8,8 @@ dir items{
     dir book_recipes {
         function recipes {
             execute as @a at @e[type=item,nbt={Item:{count:5,components:{"minecraft:custom_data":{magic_id:1}}}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/book_of_the_dead
+            execute as @a at @e[type=item,nbt={Item:{id:"minecraft:copper_ingot",count:3}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:diamond",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:wind_charge",count:16}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/wind_book
+            execute as @a at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:glow_ink_sac",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:glowstone",count:5}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/glowstone_book
         }
     }
     function output {
@@ -24,6 +26,25 @@ dir items{
         summon item_display ~ ~ ~ {billboard:"center",Tags:["book_tp","book_particles"],item:{id:"minecraft:book",components:{"minecraft:item_model":"magic:book/zombie_book"}}}
         kill @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},sort=nearest,limit=1]
         kill @e[type=item,nbt={Item:{count:5,components:{"minecraft:custom_data":{magic_id:1}}}},sort=nearest,limit=1]
+      }
+      block wind_book { 
+        data modify storage magic:loot text set value "loot spawn ~ ~ ~ loot magic_items:magic_books/wind_book"
+        data modify storage magic:music text set value "flute"
+        data modify storage magic:particles text set value "dust_color_transition{from_color:[0.09,0.13,0.15],to_color:[0.74,0.85,0.98],scale:1}"
+        summon item_display ~ ~ ~ {billboard:"center",Tags:["book_tp","book_particles"],item:{id:"minecraft:book",components:{"minecraft:item_model":"magic:book/wind_book"}}}
+        kill @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},sort=nearest,limit=1]
+        kill @e[type=item,nbt={Item:{id:"minecraft:wind_charge",count:16}},sort=nearest,limit=1]
+        kill @e[type=item,nbt={Item:{id:"minecraft:diamond",count:1}},sort=nearest,limit=1]
+        kill @e[type=item,nbt={Item:{id:"minecraft:copper_ingot",count:3}},sort=nearest,limit=1]
+      }
+      block glowstone_book { 
+        data modify storage magic:loot text set value "loot spawn ~ ~ ~ loot magic_items:magic_books/glowstone_book"
+        data modify storage magic:music text set value "didgeridoo"
+        data modify storage magic:particles text set value "dust_color_transition{from_color:[0.85,0.99,0.13],to_color:[0.07,0.31,0.01],scale:1}"
+        summon item_display ~ ~ ~ {billboard:"center",Tags:["book_tp","book_particles"],item:{id:"minecraft:book",components:{"minecraft:item_model":"magic:book/glowstone_book"}}}
+        kill @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},sort=nearest,limit=1]
+        kill @e[type=item,nbt={Item:{id:"minecraft:glowstone",count:5}},sort=nearest,limit=1]
+        kill @e[type=item,nbt={Item:{id:"minecraft:glow_ink_sac",count:1}},sort=nearest,limit=1]
       }
     }
 
@@ -42,14 +63,14 @@ function checker {
         execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run function magic_abilities:book_abilities/<%books.id%>
         execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run playsound minecraft:entity.experience_orb.pickup master @s ~ ~ ~ 1 1
       execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players remove @s Mana <%books.mana%>
-  execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players add @s Cooldown <%Math.round(books.mana+(books.mana/10))%>
+  execute if items entity @s[scores={Cooldown=0}] weapon.* *[minecraft:custom_data~{magic_id:<%books.magic_id%>b}] run execute unless entity @s[scores={Mana=..<%books.mana-1%>}] run scoreboard players add @s Cooldown <%books.cooldown%>
+      }
 }
      
 }
 function general_check {
   execute as @a at @s run function magic_items:item/id/checker
   advancement revoke @s only magic_items:right_click
-}
 }
 
 
@@ -78,7 +99,7 @@ advancement right_click {
         }
         },
         "rewards": {
-            "function": "magic_items:item/id/general_check"
+            "function": "magic_items:general_check"
         }
     }
 
