@@ -20,6 +20,10 @@ module.exports = {
   books: [
     {id:"zombie_book",magic_id:2,name:"Undead Book",mana:5,cooldown:6},
     {id:"glowstone_book",magic_id:4,name:"Glowstone Book",mana:3,cooldown:3},
-    {id:"wind_book",magic_id:5,name:"Book of Charged Winds",mana:5,cooldown:1}
+    {id:"wind_book",magic_id:5,name:"Book of Charged Winds",mana:5,cooldown:1},
+    {id:"fireball_book",magic_id:6,name:"Nethern Vol.1",mana:4,cooldown:3},
+    {id:"decoy_book",magic_id:7,name:"Book of Decoys",mana:6,cooldown:8},
+    {id:"lighting_book",magic_id:8,name:"Lighting Book",mana:6,cooldown:11},
+    {id:"war_book",magic_id:9,name:"Art of War",mana:2,cooldown:1}
   ]
 };

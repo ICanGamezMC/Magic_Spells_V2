@@ -1,15 +1,15 @@
 dir items{
     clock time 1t {
-        function magic_items:items/book_recipes/recipes
+        execute as @e[tag=Starting_Animation_CBlock] at @s run function magic_items:items/book_recipes/recipes
         
         
         }
     
     dir book_recipes {
         function recipes {
-            execute as @a at @e[type=item,nbt={Item:{count:5,components:{"minecraft:custom_data":{magic_id:1}}}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/book_of_the_dead
-            execute as @a at @e[type=item,nbt={Item:{id:"minecraft:copper_ingot",count:3}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:diamond",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:wind_charge",count:16}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/wind_book
-            execute as @a at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:glow_ink_sac",count:1}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:glowstone",count:5}}] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/glowstone_book
+            execute at @e[type=item,nbt={Item:{count:5,components:{"minecraft:custom_data":{magic_id:1}}}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/book_of_the_dead
+            execute at @e[type=item,nbt={Item:{id:"minecraft:copper_ingot",count:3}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:diamond",count:1}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:wind_charge",count:16}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/wind_book
+            execute at @e[type=item,nbt={Item:{id:"minecraft:book",count:1}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:glow_ink_sac",count:1}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] at @e[type=item,nbt={Item:{id:"minecraft:glowstone",count:5}},distance=..1] if block ~ ~-1 ~ minecraft:oak_slab[type=double,waterlogged=true] run function magic_items:items/glowstone_book
         }
     }
     function output {
