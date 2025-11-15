@@ -45,6 +45,12 @@ function tick{
             execute as @a[tag=fireball_ability,scores={Timer=100..}] run tag @s remove fireball_ability
             execute as @a[tag=fireball_ability,scores={Timer=100..}] run tag @s remove Timer
         }
+        block decoy {
+            REPEAT (0, 200, 1) as time {
+                execute as @e[tag=decoy,scores={Timer=<%Math.round(time)%>}] at @s run particle dust_color_transition{from_color:[0.91,0.91,1.0],to_color:[0.0,0.0,0.0],scale:2} ~<%Math.cos(-time/10)%> ~ ~<%Math.sin(time/10)%> 0.1 0.1 0.1 0 3 normal
+            }
+            execute as @e[tag=decoy,scores={Timer=200..}] at @s run kill @s
+        }
 
         execute as @e[tag=Timer] unless entity @s[scores={Timer=500..}] run scoreboard players add @s Timer 1
     }
@@ -79,6 +85,10 @@ dir book_abilities {
             damage @n[type=!minecraft:player] 20 minecraft:lightning_bolt
             particle minecraft:flash ~ ~ ~ 0 0 0 0 10 normal
             playsound minecraft:entity.lightning_bolt.impact master @a[distance=..10] ~ ~ ~ 1 1
+        }
+        function decoy_book {
+            summon snow_golem ^ ^ ^1 {CustomName:'[{"text":"Decoy"}]',Health:18,Tags:["decoy","Timer"],attributes:[{id:max_health,base:18f},{id:movement_speed,base:-709.8f}]}
+            playsound minecraft:entity.parrot.imitate.hoglin master @a[distance=..10] ~ ~ ~ 1 1
         }
     
 }
